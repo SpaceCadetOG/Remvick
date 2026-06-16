@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #fbfaf7;
+  color: #17211d;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: #d5a84b;
+  color: #17211d;
+}
+
+.field {
+  @apply w-full rounded border border-ink/15 bg-white px-4 py-3 text-sm text-ink outline-none transition focus:border-forest focus:ring-4 focus:ring-forest/10;
+}
+
+.label {
+  @apply text-sm font-semibold text-ink;
+}
