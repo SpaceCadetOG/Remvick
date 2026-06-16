@@ -1,7 +1,7 @@
 FROM node:20-alpine AS deps
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
-RUN corepack enable && pnpm install --frozen-lockfile
+RUN corepack enable && corepack prepare pnpm@10.13.1 --activate && pnpm install --frozen-lockfile
 
 FROM node:20-alpine AS builder
 WORKDIR /app
@@ -9,7 +9,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV NEXT_STANDALONE=true
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN corepack enable && pnpm build
+RUN corepack enable && corepack prepare pnpm@10.13.1 --activate && pnpm build
 
 FROM node:20-alpine AS runner
 WORKDIR /app
