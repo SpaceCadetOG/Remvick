@@ -14,7 +14,7 @@ export const businessLines: BusinessLine[] = [
   },
   {
     name: "High Eye Solutions",
-    description: "Property marketing, listing presentation, rental descriptions, and photo-ready positioning.",
+    description: "Drone service and aerial property media.",
     href: "https://high-eye-solutions-100156978383.us-central1.run.app",
     status: "Live",
   },
@@ -25,13 +25,8 @@ export const businessLines: BusinessLine[] = [
   },
   {
     name: "Rentals & Tenants",
-    description: "Future rental and tenant experience.",
+    description: "Future rental and tenant portal.",
     href: "/rentals",
-    status: "Live",
-  },
-  {
-    name: "Drone Services",
-    description: "Future aerial property media site.",
     status: "Under construction",
   },
   {
