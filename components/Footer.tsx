@@ -10,6 +10,9 @@ export function Footer() {
             Public website MVP for Remvick Investment Corporation. Contact information,
             service areas, license details, and brokerage disclosures are placeholders.
           </p>
+          <p className="mt-4 text-sm font-semibold text-gold">
+            High Eye Solutions: DBA / subsidiary relationship placeholder.
+          </p>
         </div>
         <div>
           <p className="font-bold text-gold">Explore</p>

@@ -60,6 +60,7 @@ export default function HomePage() {
               "Woman-owned",
               "Small disadvantaged business",
               "Owner-led service",
+              "High Eye Solutions DBA / subsidiary placeholder",
             ].map((item) => (
               <div key={item} className="rounded border border-ink/10 bg-white p-5 shadow-sm">
                 <CheckCircle2 className="mb-4 h-6 w-6 text-clay" />
