@@ -8,7 +8,13 @@ const services = [
   [KeyRound, "Property management", "Owner-focused operations for residential rental properties."],
   [UsersRound, "Tenant placement", "Inquiry handling, showing coordination, and applicant handoff support."],
   [FileText, "Leasing support", "Lease coordination, move-in communication, and record organization."],
-  [Megaphone, "Property marketing", "Listing presentation, rental descriptions, and photo-ready positioning."],
+  [
+    Megaphone,
+    "Property marketing",
+    "Listing presentation, rental descriptions, and photo-ready positioning.",
+    "https://high-eye-solutions-100156978383.us-central1.run.app",
+    "High Eye Solutions",
+  ],
   [Hammer, "Remodeling coordination", "Vendor and project coordination support for rental readiness."],
   [ClipboardList, "Administrative support", "Real estate paperwork, scheduling, and operational follow-through."],
 ] as const;
@@ -27,8 +33,8 @@ export default function ServicesPage() {
       </section>
       <section className="py-16 sm:py-20">
         <div className="mx-auto grid max-w-7xl gap-5 px-5 sm:px-8 md:grid-cols-2 lg:grid-cols-4">
-          {services.map(([icon, title, text]) => (
-            <ServiceCard key={title} icon={icon} title={title} text={text} />
+          {services.map(([icon, title, text, href, label]) => (
+            <ServiceCard key={title} icon={icon} title={title} text={text} href={href} label={label} />
           ))}
         </div>
       </section>

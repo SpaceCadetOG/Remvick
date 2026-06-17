@@ -7,8 +7,8 @@ type AboutItem = [LucideIcon, string, string];
 const aboutItems: AboutItem[] = [
   [Award, "Minority-owned", "Business certification details placeholder."],
   [Award, "Woman-owned", "Ownership language placeholder for review."],
-  [BriefcaseBusiness, "Small disadvantaged business", "Government and vendor profile copy placeholder."],
-  [MapPinned, "High Eye Solutions", "DBA / subsidiary relationship placeholder for owner review."],
+  [BriefcaseBusiness, "Small Business", "Government and vendor profile copy placeholder."],
+  [MapPinned, "Local service areas", "Office location and service-area list placeholder."],
 ];
 
 export default function AboutPage() {

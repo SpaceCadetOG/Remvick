@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BusinessLines } from "@/components/BusinessLines";
 
 export function Footer() {
   return (
@@ -10,9 +11,9 @@ export function Footer() {
             Public website MVP for Remvick Investment Corporation. Contact information,
             service areas, license details, and brokerage disclosures are placeholders.
           </p>
-          <p className="mt-4 text-sm font-semibold text-gold">
-            High Eye Solutions: DBA / subsidiary relationship placeholder.
-          </p>
+          <div className="mt-5">
+            <BusinessLines compact />
+          </div>
         </div>
         <div>
           <p className="font-bold text-gold">Explore</p>
@@ -34,7 +35,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10 px-5 py-5 text-center text-sm text-white/55">
-        © {new Date().getFullYear()} Remvick Investment Corporation. All rights reserved.
+        Copyright {new Date().getFullYear()} Remvick Investment Corporation. All rights reserved.
       </div>
     </footer>
   );

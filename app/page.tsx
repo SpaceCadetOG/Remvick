@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Building2, CheckCircle2, HeartHandshake, Home, KeyRound, ShieldCheck } from "lucide-react";
+import { BusinessLines } from "@/components/BusinessLines";
 import { ButtonLink } from "@/components/ButtonLink";
 import { PropertyCard } from "@/components/PropertyCard";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -58,15 +59,27 @@ export default function HomePage() {
             {[
               "Minority-owned",
               "Woman-owned",
-              "Small disadvantaged business",
+              "Small Business",
               "Owner-led service",
-              "High Eye Solutions DBA / subsidiary placeholder",
             ].map((item) => (
               <div key={item} className="rounded border border-ink/10 bg-white p-5 shadow-sm">
                 <CheckCircle2 className="mb-4 h-6 w-6 text-clay" />
                 <p className="font-semibold">{item}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <SectionHeading
+            eyebrow="Business lines"
+            title="One family platform for current and future services."
+            text="Remvick Group will become the central site that points visitors to each business line as those sites are built."
+          />
+          <div className="mt-10">
+            <BusinessLines />
           </div>
         </div>
       </section>
