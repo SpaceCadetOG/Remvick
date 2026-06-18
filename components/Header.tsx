@@ -4,6 +4,7 @@ const navItems = [
   ["About", "/about"],
   ["Services", "/services"],
   ["Rentals", "/rentals"],
+  ["Admin Preview", "/admin"],
   ["Contact", "/contact"],
 ];
 
@@ -25,15 +26,15 @@ export function Header() {
           ))}
         </nav>
         <Link
-          href="/contact"
+          href="/admin"
           className="hidden rounded bg-forest px-4 py-2.5 text-sm font-bold text-white transition hover:bg-clay sm:inline-flex"
         >
-          Get in Touch
+          Admin Preview
         </Link>
       </div>
-      <nav className="flex justify-around border-t border-ink/10 px-3 py-3 md:hidden">
+      <nav className="flex gap-6 overflow-x-auto border-t border-ink/10 px-5 py-3 md:hidden">
         {navItems.map(([label, href]) => (
-          <Link key={href} href={href} className="text-sm font-bold text-ink/70">
+          <Link key={href} href={href} className="shrink-0 text-sm font-bold text-ink/70">
             {label}
           </Link>
         ))}
