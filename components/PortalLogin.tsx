@@ -1,13 +1,12 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Building2, Eye, EyeOff, KeyRound, LogIn, ShieldCheck, Users } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Building2, Eye, EyeOff, HardHat, KeyRound, LogIn, ShieldCheck, Users } from "lucide-react";
 import { authenticateDemoUser, DEMO_SESSION_KEY } from "@/data/demo-auth";
 
 export function PortalLogin() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -23,12 +22,13 @@ export function PortalLogin() {
     }
 
     window.sessionStorage.setItem(DEMO_SESSION_KEY, JSON.stringify(session));
-    const requestedRole = searchParams.get("next");
-    const destination =
-      requestedRole === session.role
-        ? session.role === "admin" ? "/admin" : "/tenant"
-        : session.role === "admin" ? "/admin" : "/tenant";
-    router.push(destination);
+    const roleDestination =
+      session.role === "admin"
+        ? "/admin"
+        : session.role === "contractor"
+          ? "/contractor"
+          : "/tenant";
+    router.push(roleDestination);
   }
 
   function useCredential(nextUsername: string, nextPassword: string) {
@@ -57,6 +57,11 @@ export function PortalLogin() {
               <Users className="h-7 w-7 text-gold" />
               <p className="mt-3 font-bold">Tenant</p>
               <p className="mt-1 text-sm text-white/65">Balance, payment simulation, lease information, requests, and files.</p>
+            </div>
+            <div className="border border-white/15 bg-white/5 p-5">
+              <HardHat className="h-7 w-7 text-gold" />
+              <p className="mt-3 font-bold">Contractor / Service</p>
+              <p className="mt-1 text-sm text-white/65">Assigned work orders, scheduling, notes, and completion updates.</p>
             </div>
           </div>
         </div>
@@ -122,6 +127,10 @@ export function PortalLogin() {
               <button onClick={() => useCredential("admin", "admin")} className="border border-ink/10 p-4 text-left transition hover:border-clay">
                 <span className="block font-bold">Administrator</span>
                 <span className="mt-1 block text-sm text-ink/55">admin / admin</span>
+              </button>
+              <button onClick={() => useCredential("contractor", "service")} className="border border-ink/10 p-4 text-left transition hover:border-clay">
+                <span className="block font-bold">Contractor / Service</span>
+                <span className="mt-1 block text-sm text-ink/55">contractor / service</span>
               </button>
               {[1, 2, 3, 4].map((number) => (
                 <button

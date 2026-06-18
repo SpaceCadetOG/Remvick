@@ -1,4 +1,4 @@
-export type DemoRole = "admin" | "tenant";
+export type DemoRole = "admin" | "contractor" | "tenant";
 
 export type DemoSession = {
   username: string;
@@ -19,6 +19,12 @@ export const demoUsers: DemoUser[] = [
     password: "admin",
     role: "admin",
     displayName: "Administrator",
+  },
+  {
+    username: "contractor",
+    password: "service",
+    role: "contractor",
+    displayName: "Service Contractor",
   },
   ...[1, 2, 3, 4].map((number) => ({
     username: `tenant${number}`,

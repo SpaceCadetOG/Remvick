@@ -21,7 +21,7 @@ export function Footer() {
             <Link href="/about">About</Link>
             <Link href="/services">Services</Link>
             <Link href="/rentals">Rentals</Link>
-            <Link href="/portal">Portal Sign In</Link>
+            <Link href="/portal">Login</Link>
             <Link href="/contact">Contact</Link>
           </div>
         </div>

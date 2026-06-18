@@ -4,7 +4,7 @@ const navItems = [
   ["About", "/about"],
   ["Services", "/services"],
   ["Rentals", "/rentals"],
-  ["Portal", "/portal"],
+  ["Login", "/portal"],
   ["Contact", "/contact"],
 ];
 
@@ -29,7 +29,7 @@ export function Header() {
           href="/portal"
           className="hidden rounded bg-forest px-4 py-2.5 text-sm font-bold text-white transition hover:bg-clay sm:inline-flex"
         >
-          Portal Sign In
+          Login
         </Link>
       </div>
       <nav className="flex gap-6 overflow-x-auto border-t border-ink/10 px-5 py-3 md:hidden">

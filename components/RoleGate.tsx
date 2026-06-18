@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AdminPortal } from "@/components/AdminPortal";
+import { ContractorPortal } from "@/components/ContractorPortal";
 import { TenantPortal } from "@/components/TenantPortal";
 import { DEMO_SESSION_KEY, type DemoRole, type DemoSession } from "@/data/demo-auth";
 
@@ -24,7 +25,13 @@ export function RoleGate({ role }: RoleGateProps) {
     try {
       const parsedSession = JSON.parse(rawSession) as DemoSession;
       if (parsedSession.role !== role) {
-        router.replace(parsedSession.role === "admin" ? "/admin" : "/tenant");
+        router.replace(
+          parsedSession.role === "admin"
+            ? "/admin"
+            : parsedSession.role === "contractor"
+              ? "/contractor"
+              : "/tenant",
+        );
         return;
       }
       setSession(parsedSession);
@@ -42,5 +49,7 @@ export function RoleGate({ role }: RoleGateProps) {
     );
   }
 
-  return role === "admin" ? <AdminPortal session={session} /> : <TenantPortal session={session} />;
+  if (role === "admin") return <AdminPortal session={session} />;
+  if (role === "contractor") return <ContractorPortal session={session} />;
+  return <TenantPortal session={session} />;
 }
