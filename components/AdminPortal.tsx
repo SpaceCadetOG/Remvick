@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Bell,
   Building2,
@@ -10,6 +11,7 @@ import {
   ClipboardList,
   FileText,
   LayoutDashboard,
+  LogOut,
   MessageSquareText,
   Plus,
   Search,
@@ -17,6 +19,7 @@ import {
   Users,
   Wrench,
 } from "lucide-react";
+import { DEMO_SESSION_KEY, type DemoSession } from "@/data/demo-auth";
 import {
   maintenanceRecords,
   paymentRecords,
@@ -78,7 +81,8 @@ function PlaceholderPanel({ view }: { view: View }) {
   );
 }
 
-export function AdminPortal() {
+export function AdminPortal({ session }: { session: DemoSession }) {
+  const router = useRouter();
   const [activeView, setActiveView] = useState<View>("Overview");
   const [query, setQuery] = useState("");
 
@@ -94,6 +98,11 @@ export function AdminPortal() {
 
   const totalBalance = tenantRecords.reduce((sum, tenant) => sum + tenant.balance, 0);
 
+  function signOut() {
+    window.sessionStorage.removeItem(DEMO_SESSION_KEY);
+    router.push("/portal");
+  }
+
   return (
     <div className="min-h-screen bg-[#f4f6f3]">
       <div className="border-b border-ink/10 bg-ink text-white">
@@ -104,7 +113,7 @@ export function AdminPortal() {
           </div>
           <div className="flex items-center gap-3">
             <div className="hidden text-right sm:block">
-              <p className="text-sm font-bold">Administrator Placeholder</p>
+              <p className="text-sm font-bold">{session.displayName}</p>
               <p className="text-xs text-white/60">Owner / Property Manager</p>
             </div>
             <button title="Notifications" className="grid h-10 w-10 place-items-center rounded border border-white/20 bg-white/5">
@@ -112,6 +121,9 @@ export function AdminPortal() {
             </button>
             <button title="Settings" className="grid h-10 w-10 place-items-center rounded border border-white/20 bg-white/5">
               <Settings className="h-5 w-5" />
+            </button>
+            <button onClick={signOut} title="Sign out" className="grid h-10 w-10 place-items-center rounded border border-white/20 bg-white/5">
+              <LogOut className="h-5 w-5" />
             </button>
           </div>
         </div>

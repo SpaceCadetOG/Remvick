@@ -23,7 +23,7 @@ export const tenantRecords: TenantRecord[] = [
     property: "Home 1",
     unit: "Chicago, IL",
     leaseEnd: "Dec 31, 2026",
-    balance: 0,
+    balance: 2250,
     status: "CURRENT",
   },
   {
@@ -62,7 +62,7 @@ export const tenantRecords: TenantRecord[] = [
 ];
 
 export const paymentRecords = [
-  { id: "payment-001", tenant: "Tenant One", property: "Home 1", amount: 2250, due: "Jun 1, 2026", status: "PAID" as PaymentStatus },
+  { id: "payment-001", tenant: "Tenant One", property: "Home 1", amount: 2250, due: "Jun 1, 2026", status: "DUE" as PaymentStatus },
   { id: "payment-002", tenant: "Tenant Two", property: "Home 2", amount: 1650, due: "Jun 1, 2026", status: "DUE" as PaymentStatus },
   { id: "payment-003", tenant: "Tenant Three", property: "Home 3", amount: 2850, due: "Jun 1, 2026", status: "LATE" as PaymentStatus },
   { id: "payment-004", tenant: "Tenant Four", property: "Home 4", amount: 1350, due: "Jun 1, 2026", status: "PAID" as PaymentStatus },

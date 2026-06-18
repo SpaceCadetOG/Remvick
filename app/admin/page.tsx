@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AdminPortal } from "@/components/AdminPortal";
+import { RoleGate } from "@/components/RoleGate";
 
 export const metadata: Metadata = {
   title: "Tenant Administration Preview | Remvick Group",
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function AdminPage() {
-  return <AdminPortal />;
+  return <RoleGate role="admin" />;
 }
