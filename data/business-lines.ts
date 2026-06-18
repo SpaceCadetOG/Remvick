@@ -14,8 +14,9 @@ export const businessLines: BusinessLine[] = [
   },
   {
     name: "Remvick Consulting",
-    description: "Brokerage and consulting site planned.",
-    status: "Under construction",
+    description: "Brokerage, property management, leasing, remodeling, and real estate operations support.",
+    href: "/consulting",
+    status: "Live",
   },
   {
     name: "Rental Listings",

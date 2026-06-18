@@ -1,6 +1,7 @@
 import { Building2, ClipboardList, FileText, Hammer, Home, KeyRound, Megaphone, UsersRound } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ServiceCard } from "@/components/ServiceCard";
+import Link from "next/link";
 
 const services = [
   [Home, "Residential rentals", "Marketing and communication support for residential rental homes."],
@@ -43,6 +44,12 @@ export default function ServicesPage() {
             payments, maintenance requests, owner/admin tools, documents, messaging, and
             notification workflows when the business is ready.
           </p>
+          <Link
+            href="/consulting"
+            className="mt-7 inline-flex min-h-12 items-center justify-center rounded bg-clay px-6 py-3 font-bold text-white transition hover:bg-white hover:text-ink"
+          >
+            Explore Remvick Consulting
+          </Link>
         </div>
       </section>
     </>
