@@ -13,25 +13,20 @@ export const businessLines: BusinessLine[] = [
     status: "Live",
   },
   {
-    name: "High Eye Solutions",
-    description: "Drone service and aerial property media.",
-    href: "https://high-eye-solutions-100156978383.us-central1.run.app",
-    status: "Live",
-  },
-  {
     name: "Remvick Consulting",
     description: "Brokerage and consulting site planned.",
     status: "Under construction",
   },
   {
-    name: "Rentals & Tenants",
-    description: "Login for tenants, contractors, administrators, and new rental applicants.",
-    href: "/portal",
+    name: "Rental Listings",
+    description: "Browse available, upcoming, and occupied rental properties.",
+    href: "/rentals",
     status: "Live",
   },
   {
-    name: "Residential Home Inspections",
-    description: "Future residential inspection services site.",
-    status: "Under construction",
+    name: "Tenant Portal",
+    description: "Login for tenants, contractors, administrators, and new rental applicants.",
+    href: "/portal",
+    status: "Live",
   },
 ];
