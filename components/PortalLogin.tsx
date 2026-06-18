@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { Building2, Eye, EyeOff, HardHat, KeyRound, LogIn, ShieldCheck, Users } from "lucide-react";
+import { Building2, ClipboardList, Eye, EyeOff, HardHat, KeyRound, LogIn, ShieldCheck, Users } from "lucide-react";
 import { authenticateDemoUser, DEMO_SESSION_KEY } from "@/data/demo-auth";
 
 export function PortalLogin() {
@@ -25,6 +25,8 @@ export function PortalLogin() {
     const roleDestination =
       session.role === "admin"
         ? "/admin"
+        : session.role === "applicant"
+          ? "/applicant"
         : session.role === "contractor"
           ? "/contractor"
           : "/tenant";
@@ -44,8 +46,8 @@ export function PortalLogin() {
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-gold">Remvick Portal</p>
           <h1 className="mt-4 font-serif text-4xl font-semibold sm:text-5xl">Choose the right workspace.</h1>
           <p className="mt-5 max-w-md leading-7 text-white/75">
-            This demo separates owner and property-management operations from each tenant&apos;s
-            personal rental experience.
+            One login routes administrators, contractors, tenants, and new applicants to the
+            workspace designed for their role.
           </p>
           <div className="mt-10 grid gap-4">
             <div className="border border-white/15 bg-white/5 p-5">
@@ -62,6 +64,11 @@ export function PortalLogin() {
               <HardHat className="h-7 w-7 text-gold" />
               <p className="mt-3 font-bold">Contractor / Service</p>
               <p className="mt-1 text-sm text-white/65">Assigned work orders, scheduling, notes, and completion updates.</p>
+            </div>
+            <div className="border border-white/15 bg-white/5 p-5">
+              <ClipboardList className="h-7 w-7 text-gold" />
+              <p className="mt-3 font-bold">New Applicant</p>
+              <p className="mt-1 text-sm text-white/65">Select a rental, complete an application, and review application status.</p>
             </div>
           </div>
         </div>
@@ -86,7 +93,7 @@ export function PortalLogin() {
                 onChange={(event) => setUsername(event.target.value)}
                 autoComplete="username"
                 required
-                placeholder="admin or tenant1"
+                placeholder="admin, contractor, applicant, or tenant1"
               />
             </label>
             <label className="mt-5 grid gap-2">
@@ -131,6 +138,10 @@ export function PortalLogin() {
               <button onClick={() => useCredential("contractor", "service")} className="border border-ink/10 p-4 text-left transition hover:border-clay">
                 <span className="block font-bold">Contractor / Service</span>
                 <span className="mt-1 block text-sm text-ink/55">contractor / service</span>
+              </button>
+              <button onClick={() => useCredential("applicant", "apply")} className="border border-ink/10 p-4 text-left transition hover:border-clay">
+                <span className="block font-bold">New Applicant</span>
+                <span className="mt-1 block text-sm text-ink/55">applicant / apply</span>
               </button>
               {[1, 2, 3, 4].map((number) => (
                 <button

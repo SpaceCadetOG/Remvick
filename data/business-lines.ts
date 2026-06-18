@@ -25,9 +25,9 @@ export const businessLines: BusinessLine[] = [
   },
   {
     name: "Rentals & Tenants",
-    description: "Future rental and tenant portal.",
-    href: "/rentals",
-    status: "Under construction",
+    description: "Login for tenants, contractors, administrators, and new rental applicants.",
+    href: "/portal",
+    status: "Live",
   },
   {
     name: "Residential Home Inspections",

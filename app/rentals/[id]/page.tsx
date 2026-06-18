@@ -103,7 +103,7 @@ export default function RentalDetailPage({ params }: { params: { id: string } })
                 instructions, and rental criteria placeholders.
               </p>
               <div className="mt-6 grid gap-3">
-                <ButtonLink href="/contact">Contact / Apply</ButtonLink>
+                <ButtonLink href="/portal">Apply / Login</ButtonLink>
                 <p className="text-sm text-ink/55">
                   TODO: Add online applications, screening workflow, payments, tenant portal, and
                   document upload features in a later release.
