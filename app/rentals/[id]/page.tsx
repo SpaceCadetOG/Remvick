@@ -4,14 +4,14 @@ import { notFound } from "next/navigation";
 import { Bath, BedDouble, CalendarDays, MapPin, Ruler } from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink";
 import { StatusBadge } from "@/components/StatusBadge";
-import { getPropertyById, properties } from "@/data/properties";
+import { getPublicPropertyById, publicProperties } from "@/data/properties";
 
 export function generateStaticParams() {
-  return properties.map((property) => ({ id: property.id }));
+  return publicProperties.map((property) => ({ id: property.id }));
 }
 
 export function generateMetadata({ params }: { params: { id: string } }) {
-  const property = getPropertyById(params.id);
+  const property = getPublicPropertyById(params.id);
   return {
     title: property ? `${property.title} | Remvick Rentals` : "Rental | Remvick Group",
   };
@@ -24,7 +24,7 @@ const formatter = new Intl.NumberFormat("en-US", {
 });
 
 export default function RentalDetailPage({ params }: { params: { id: string } }) {
-  const property = getPropertyById(params.id);
+  const property = getPublicPropertyById(params.id);
 
   if (!property) {
     notFound();
@@ -43,7 +43,8 @@ export default function RentalDetailPage({ params }: { params: { id: string } })
               <h1 className="mt-4 font-serif text-5xl font-semibold">{property.title}</h1>
               <p className="mt-3 flex items-center gap-2 text-ink/65">
                 <MapPin className="h-4 w-4" />
-                {property.address}, {property.city}, {property.state} {property.zip}
+                {property.address}
+                {property.unit ? `, ${property.unit}` : ""}, {property.city}, {property.state} {property.zip}
               </p>
             </div>
             <p className="text-4xl font-bold text-forest">
@@ -86,6 +87,28 @@ export default function RentalDetailPage({ params }: { params: { id: string } })
               </div>
               <h2 className="mt-10 font-serif text-4xl font-semibold">Description</h2>
               <p className="mt-4 text-lg leading-8 text-ink/72">{property.description}</p>
+              <div className="mt-10 grid gap-6 md:grid-cols-2">
+                <section>
+                  <h2 className="font-serif text-3xl font-semibold">Property details</h2>
+                  <ul className="mt-5 grid gap-3">
+                    {property.propertyDetails.map((detail) => (
+                      <li key={detail} className="rounded bg-mist px-4 py-3 font-semibold text-ink/75">
+                        {detail}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+                <section>
+                  <h2 className="font-serif text-3xl font-semibold">Unit details</h2>
+                  <ul className="mt-5 grid gap-3">
+                    {property.unitDetails.map((detail) => (
+                      <li key={detail} className="rounded bg-mist px-4 py-3 font-semibold text-ink/75">
+                        {detail}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              </div>
               <h2 className="mt-10 font-serif text-4xl font-semibold">Amenities</h2>
               <ul className="mt-5 grid gap-3 sm:grid-cols-2">
                 {property.amenities.map((amenity) => (

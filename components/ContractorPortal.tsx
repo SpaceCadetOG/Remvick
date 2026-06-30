@@ -7,7 +7,6 @@ import {
   CheckCircle2,
   ClipboardCheck,
   Clock3,
-  FileText,
   HardHat,
   LogOut,
   MapPin,
@@ -70,6 +69,8 @@ export function ContractorPortal({ session }: { session: DemoSession }) {
   const [jobs, setJobs] = useState(initialJobs);
   const [selectedJobId, setSelectedJobId] = useState(initialJobs[0].id);
   const [noteSaved, setNoteSaved] = useState(false);
+  const [completionPhotos, setCompletionPhotos] = useState<Record<string, boolean>>({});
+  const [photoWarning, setPhotoWarning] = useState(false);
 
   const selectedJob = jobs.find((job) => job.id === selectedJobId) ?? jobs[0];
   const openJobs = jobs.filter((job) => job.status !== "Completed").length;
@@ -80,13 +81,19 @@ export function ContractorPortal({ session }: { session: DemoSession }) {
   }
 
   function advanceStatus() {
+    const nextStatus = statusOrder[Math.min(statusOrder.indexOf(selectedJob.status) + 1, statusOrder.length - 1)];
+    if (nextStatus === "Completed" && !completionPhotos[selectedJob.id]) {
+      setPhotoWarning(true);
+      return;
+    }
+
     setJobs((current) =>
       current.map((job) => {
         if (job.id !== selectedJob.id) return job;
-        const index = statusOrder.indexOf(job.status);
-        return { ...job, status: statusOrder[Math.min(index + 1, statusOrder.length - 1)] };
+        return { ...job, status: nextStatus };
       }),
     );
+    setPhotoWarning(false);
   }
 
   return (
@@ -141,6 +148,7 @@ export function ContractorPortal({ session }: { session: DemoSession }) {
                   onClick={() => {
                     setSelectedJobId(job.id);
                     setNoteSaved(false);
+                    setPhotoWarning(false);
                   }}
                   className={`block w-full p-5 text-left transition ${
                     selectedJob.id === job.id ? "bg-mist" : "hover:bg-[#fafbf9]"
@@ -199,15 +207,28 @@ export function ContractorPortal({ session }: { session: DemoSession }) {
                 <MessageSquareText className="h-4 w-4" />
                 Message
               </button>
-              <button disabled className="inline-flex items-center gap-2 rounded border border-ink/15 px-4 py-3 text-sm font-bold opacity-60">
-                <FileText className="h-4 w-4" />
-                Attach photo
-              </button>
             </div>
 
             <label className="mt-7 grid gap-2">
               <span className="label">Service notes</span>
               <textarea className="field min-h-32" placeholder="Describe work performed, materials, and follow-up needs." />
+            </label>
+            <label className="mt-5 grid gap-2">
+              <span className="label">Required completion photos</span>
+              <input
+                className="field"
+                type="file"
+                accept="image/*"
+                multiple
+                onChange={(event) => {
+                  setCompletionPhotos((current) => ({ ...current, [selectedJob.id]: Boolean(event.currentTarget.files?.length) }));
+                  setPhotoWarning(false);
+                }}
+              />
+            </label>
+            <label className="mt-5 grid gap-2">
+              <span className="label">Completion update</span>
+              <textarea className="field min-h-24" placeholder="Document resolution, remaining issues, and tenant/vendor follow-up." />
             </label>
             <div className="mt-4 flex flex-col gap-3 sm:flex-row">
               <button
@@ -227,6 +248,7 @@ export function ContractorPortal({ session }: { session: DemoSession }) {
               </button>
             </div>
             {noteSaved ? <p className="mt-4 bg-forest/10 p-4 text-sm font-semibold text-forest">Service note saved in this browser session.</p> : null}
+            {photoWarning ? <p className="mt-4 bg-clay/10 p-4 text-sm font-semibold text-clay">Attach at least one completion photo before marking this job complete.</p> : null}
           </section>
         </div>
 

@@ -8,34 +8,32 @@ import {
   ChevronLeft,
   ChevronRight,
   ClipboardList,
-  FileText,
   Home,
   LogOut,
   ShieldCheck,
-  Upload,
   UserRound,
   WalletCards,
 } from "lucide-react";
 import { DEMO_SESSION_KEY, type DemoSession } from "@/data/demo-auth";
-import { properties } from "@/data/properties";
+import { publicProperties } from "@/data/properties";
 
 type ApplicationStep = 1 | 2 | 3 | 4;
 
 const steps = [
-  { number: 1 as const, label: "Rental", icon: Home },
-  { number: 2 as const, label: "Household", icon: UserRound },
-  { number: 3 as const, label: "Income", icon: WalletCards },
+  { number: 1 as const, label: "Basics", icon: Home },
+  { number: 2 as const, label: "Screening", icon: UserRound },
+  { number: 3 as const, label: "Offline income", icon: WalletCards },
   { number: 4 as const, label: "Review", icon: ShieldCheck },
 ];
 
 export function ApplicantPortal({ session }: { session: DemoSession }) {
   const router = useRouter();
   const [step, setStep] = useState<ApplicationStep>(1);
-  const [selectedProperty, setSelectedProperty] = useState(properties[0].id);
+  const [selectedProperty, setSelectedProperty] = useState(publicProperties[0].id);
+  const [screeningPass, setScreeningPass] = useState(true);
   const [submitted, setSubmitted] = useState(false);
-  const [documents, setDocuments] = useState<string[]>([]);
 
-  const property = properties.find((item) => item.id === selectedProperty) ?? properties[0];
+  const property = publicProperties.find((item) => item.id === selectedProperty) ?? publicProperties[0];
 
   function signOut() {
     window.sessionStorage.removeItem(DEMO_SESSION_KEY);
@@ -48,14 +46,6 @@ export function ApplicantPortal({ session }: { session: DemoSession }) {
 
   function previousStep() {
     setStep((current) => Math.max(1, current - 1) as ApplicationStep);
-  }
-
-  function simulateUpload() {
-    setDocuments((current) =>
-      current.includes("Income document placeholder.pdf")
-        ? current
-        : [...current, "Income document placeholder.pdf"],
-    );
   }
 
   function submitApplication(event: FormEvent<HTMLFormElement>) {
@@ -88,9 +78,16 @@ export function ApplicantPortal({ session }: { session: DemoSession }) {
             </p>
             <div className="mx-auto mt-8 grid max-w-lg gap-4 bg-mist p-5 text-left sm:grid-cols-2">
               <div><p className="text-sm text-ink/50">Application ID</p><p className="mt-1 font-bold">APP-DEMO-1001</p></div>
-              <div><p className="text-sm text-ink/50">Status</p><p className="mt-1 font-bold text-clay">Submitted for review</p></div>
+              <div><p className="text-sm text-ink/50">Status</p><p className="mt-1 font-bold text-clay">{screeningPass ? "Eligible to schedule showing" : "Needs admin review"}</p></div>
               <div><p className="text-sm text-ink/50">Rental</p><p className="mt-1 font-bold">{property.title}</p></div>
-              <div><p className="text-sm text-ink/50">Next step</p><p className="mt-1 font-bold">Screening placeholder</p></div>
+              <div><p className="text-sm text-ink/50">Next step</p><p className="mt-1 font-bold">{screeningPass ? "Showing scheduling" : "Manual follow-up"}</p></div>
+            </div>
+            <div className="mx-auto mt-5 max-w-lg rounded border border-ink/10 bg-white p-5 text-left">
+              <p className="font-bold">Workflow placeholder</p>
+              <p className="mt-2 text-sm leading-6 text-ink/60">
+                Applicants who pass basic criteria can schedule a property showing. The secure
+                background-check link is sent only after the showing or manual approval step.
+              </p>
             </div>
             <button onClick={() => setSubmitted(false)} className="mt-8 rounded bg-forest px-5 py-3 font-bold text-white">
               Review demo application
@@ -149,10 +146,10 @@ export function ApplicantPortal({ session }: { session: DemoSession }) {
             {step === 1 ? (
               <section>
                 <p className="text-sm font-bold uppercase tracking-[0.16em] text-clay">Step 1</p>
-                <h2 className="mt-2 font-serif text-3xl font-semibold">Choose a rental</h2>
-                <p className="mt-3 text-ink/55">Select the placeholder home you would like to apply for.</p>
+                <h2 className="mt-2 font-serif text-3xl font-semibold">Applicant basics and rental interest</h2>
+                <p className="mt-3 text-ink/55">Select the public rental you are interested in and provide basic contact details.</p>
                 <div className="mt-6 grid gap-4 md:grid-cols-2">
-                  {properties.map((item) => (
+                  {publicProperties.map((item) => (
                     <label
                       key={item.id}
                       className={`cursor-pointer border p-5 transition ${
@@ -175,17 +172,10 @@ export function ApplicantPortal({ session }: { session: DemoSession }) {
                         <Building2 className="h-5 w-5 text-clay" />
                       </div>
                       <p className="mt-5 text-2xl font-bold text-forest">${item.rentAmount.toLocaleString()}<span className="text-sm text-ink/45"> / mo</span></p>
-                      <p className="mt-2 text-sm text-ink/55">{item.bedrooms} bed · {item.bathrooms} bath · {item.squareFeet} sq ft</p>
+                      <p className="mt-2 text-sm text-ink/55">{item.bedrooms} bed / {item.bathrooms} bath / {item.squareFeet} sq ft</p>
                     </label>
                   ))}
                 </div>
-              </section>
-            ) : null}
-
-            {step === 2 ? (
-              <section>
-                <p className="text-sm font-bold uppercase tracking-[0.16em] text-clay">Step 2</p>
-                <h2 className="mt-2 font-serif text-3xl font-semibold">Applicant and household</h2>
                 <div className="mt-6 grid gap-5 sm:grid-cols-2">
                   <label className="grid gap-2"><span className="label">First name</span><input className="field" required placeholder="Applicant" /></label>
                   <label className="grid gap-2"><span className="label">Last name</span><input className="field" required placeholder="Placeholder" /></label>
@@ -194,29 +184,48 @@ export function ApplicantPortal({ session }: { session: DemoSession }) {
                   <label className="grid gap-2"><span className="label">Desired move-in date</span><input className="field" type="date" required /></label>
                   <label className="grid gap-2"><span className="label">Household size</span><input className="field" type="number" min="1" defaultValue="1" required /></label>
                 </div>
+              </section>
+            ) : null}
+
+            {step === 2 ? (
+              <section>
+                <p className="text-sm font-bold uppercase tracking-[0.16em] text-clay">Step 2</p>
+                <h2 className="mt-2 font-serif text-3xl font-semibold">Basic screening questions</h2>
+                <p className="mt-3 text-ink/55">
+                  These demo answers determine whether the applicant can schedule a showing. Final
+                  criteria, notices, and compliance language must be reviewed before production.
+                </p>
+                <div className="mt-6 grid gap-5 sm:grid-cols-2">
+                  <label className="grid gap-2"><span className="label">Can you provide photo ID before lease signing?</span><select className="field" required><option>Yes</option><option>No</option></select></label>
+                  <label className="grid gap-2"><span className="label">Have you had an eviction in the last 3 years?</span><select className="field" required onChange={(event) => setScreeningPass(event.currentTarget.value === "No")}><option>No</option><option>Yes</option></select></label>
+                  <label className="grid gap-2"><span className="label">Can you attend a property showing?</span><select className="field" required><option>Yes</option><option>No</option></select></label>
+                  <label className="grid gap-2"><span className="label">Desired lease length</span><select className="field" required><option>12 months</option><option>Month-to-month placeholder</option><option>Other</option></select></label>
+                </div>
                 <label className="mt-5 grid gap-2"><span className="label">Current address</span><input className="field" required placeholder="Address placeholder" /></label>
-                <label className="mt-5 grid gap-2"><span className="label">Additional occupants</span><textarea className="field min-h-24" placeholder="Names and relationship placeholders" /></label>
+                <label className="mt-5 grid gap-2"><span className="label">Additional occupants or notes</span><textarea className="field min-h-24" placeholder="Names, relationships, pets, or scheduling notes" /></label>
+                <div className={`mt-5 rounded p-4 text-sm font-semibold ${screeningPass ? "bg-forest/10 text-forest" : "bg-clay/10 text-clay"}`}>
+                  {screeningPass
+                    ? "Demo result: applicant may schedule a showing after admin review."
+                    : "Demo result: application should pause for manual admin review."}
+                </div>
               </section>
             ) : null}
 
             {step === 3 ? (
               <section>
                 <p className="text-sm font-bold uppercase tracking-[0.16em] text-clay">Step 3</p>
-                <h2 className="mt-2 font-serif text-3xl font-semibold">Employment and income</h2>
-                <div className="mt-6 grid gap-5 sm:grid-cols-2">
-                  <label className="grid gap-2"><span className="label">Employer</span><input className="field" required placeholder="Employer placeholder" /></label>
-                  <label className="grid gap-2"><span className="label">Job title</span><input className="field" required placeholder="Position placeholder" /></label>
-                  <label className="grid gap-2"><span className="label">Monthly gross income</span><input className="field" type="number" min="0" required placeholder="0" /></label>
-                  <label className="grid gap-2"><span className="label">Time employed</span><input className="field" required placeholder="Years / months" /></label>
-                </div>
-                <div className="mt-6 border border-dashed border-ink/20 bg-mist p-6 text-center">
-                  <Upload className="mx-auto h-7 w-7 text-clay" />
-                  <p className="mt-3 font-bold">Income verification placeholder</p>
-                  <p className="mt-1 text-sm text-ink/50">Pay stubs, offer letter, or other permitted documentation.</p>
-                  <button type="button" onClick={simulateUpload} className="mt-4 rounded border border-forest px-4 py-2 text-sm font-bold text-forest">
-                    Simulate document upload
-                  </button>
-                  {documents.map((document) => <p key={document} className="mt-3 text-sm font-semibold text-forest">{document}</p>)}
+                <h2 className="mt-2 font-serif text-3xl font-semibold">Income verification disabled</h2>
+                <div className="mt-6 border border-dashed border-ink/20 bg-mist p-6">
+                  <p className="font-bold">Handled offline for now</p>
+                  <p className="mt-2 leading-7 text-ink/60">
+                    Income verification is intentionally disabled in the online demo. In production,
+                    this step can collect documents or connect to a screening partner after Remvick
+                    confirms the workflow and required disclosures.
+                  </p>
+                  <fieldset disabled className="mt-6 grid gap-5 opacity-50 sm:grid-cols-2">
+                    <label className="grid gap-2"><span className="label">Employer</span><input className="field" placeholder="Disabled placeholder" /></label>
+                    <label className="grid gap-2"><span className="label">Monthly gross income</span><input className="field" placeholder="Disabled placeholder" /></label>
+                  </fieldset>
                 </div>
               </section>
             ) : null}
@@ -224,12 +233,20 @@ export function ApplicantPortal({ session }: { session: DemoSession }) {
             {step === 4 ? (
               <section>
                 <p className="text-sm font-bold uppercase tracking-[0.16em] text-clay">Step 4</p>
-                <h2 className="mt-2 font-serif text-3xl font-semibold">Review and consent</h2>
+                <h2 className="mt-2 font-serif text-3xl font-semibold">Final review and submission</h2>
                 <div className="mt-6 grid gap-4 bg-mist p-5 sm:grid-cols-2">
                   <div><p className="text-sm text-ink/50">Rental</p><p className="mt-1 font-bold">{property.title}</p></div>
                   <div><p className="text-sm text-ink/50">Location</p><p className="mt-1 font-bold">{property.city}, {property.state}</p></div>
                   <div><p className="text-sm text-ink/50">Monthly rent</p><p className="mt-1 font-bold">${property.rentAmount.toLocaleString()}</p></div>
-                  <div><p className="text-sm text-ink/50">Application fee</p><p className="mt-1 font-bold">Not configured</p></div>
+                  <div><p className="text-sm text-ink/50">Basic criteria</p><p className="mt-1 font-bold">{screeningPass ? "Pass placeholder" : "Manual review"}</p></div>
+                </div>
+                <div className="mt-5 rounded border border-ink/10 p-5">
+                  <p className="font-bold">Next workflow after submission</p>
+                  <ol className="mt-3 grid gap-2 text-sm leading-6 text-ink/65">
+                    <li>1. Admin reviews the basic application.</li>
+                    <li>2. Qualified applicants schedule a property showing.</li>
+                    <li>3. Background-check link is sent only after showing or manual approval.</li>
+                  </ol>
                 </div>
                 <div className="mt-6 grid gap-4">
                   <label className="flex items-start gap-3"><input type="checkbox" required className="mt-1" /><span className="text-sm leading-6 text-ink/65">I certify that this demo application information is complete and understand no real screening occurs.</span></label>

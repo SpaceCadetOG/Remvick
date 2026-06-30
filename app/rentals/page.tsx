@@ -1,7 +1,7 @@
 import { Filter } from "lucide-react";
 import { PropertyCard } from "@/components/PropertyCard";
 import { SectionHeading } from "@/components/SectionHeading";
-import { properties } from "@/data/properties";
+import { publicProperties } from "@/data/properties";
 
 export default function RentalsPage() {
   return (
@@ -25,10 +25,9 @@ export default function RentalsPage() {
               </div>
               <div className="grid gap-3 sm:grid-cols-3 lg:min-w-[680px]">
                 <select className="field" defaultValue="All statuses" aria-label="Status filter placeholder">
-                  <option>All statuses</option>
+                  <option>All public statuses</option>
                   <option>Available</option>
                   <option>Upcoming</option>
-                  <option>Occupied</option>
                 </select>
                 <select className="field" defaultValue="Any bedrooms" aria-label="Bedroom filter placeholder">
                   <option>Any bedrooms</option>
@@ -47,7 +46,7 @@ export default function RentalsPage() {
             <p className="mt-3 text-sm text-ink/55">Filter UI is visual only for this MVP.</p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {properties.map((property) => (
+            {publicProperties.map((property) => (
               <PropertyCard key={property.id} property={property} />
             ))}
           </div>

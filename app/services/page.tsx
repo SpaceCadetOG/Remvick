@@ -1,15 +1,18 @@
-import { Building2, ClipboardList, FileText, Hammer, Home, KeyRound, Megaphone, UsersRound } from "lucide-react";
+import { ClipboardList, FileSearch, FileText, Hammer, Home, KeyRound, Megaphone, Plane, Search, ShieldCheck, UsersRound } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ServiceCard } from "@/components/ServiceCard";
 import Link from "next/link";
 
 const services = [
   [Home, "Residential rentals", "Marketing and communication support for residential rental homes."],
-  [Building2, "Real estate brokerage", "Brokerage services placeholder pending final details and disclosures."],
-  [KeyRound, "Property management", "Owner-focused operations for residential rental properties."],
-  [UsersRound, "Tenant placement", "Inquiry handling, showing coordination, and applicant handoff support."],
-  [FileText, "Leasing support", "Lease coordination, move-in communication, and record organization."],
-  [Megaphone, "Property marketing", "Listing presentation, rental descriptions, and photo-ready positioning."],
+  [Search, "Rental listings", "Public rental listings for available and upcoming homes only."],
+  [KeyRound, "Leasing support", "Tenant placement, lease coordination, and move-in readiness support."],
+  [ShieldCheck, "Property management", "Owner-focused operations for residential rental properties."],
+  [UsersRound, "Rental search support", "Help for people looking for homes to rent and understand next steps."],
+  [FileText, "Tenant placement", "Inquiry handling, showing coordination, applicant handoff, and record organization."],
+  [Megaphone, "Government contracting", "Placeholder capability statement, vendor profile, and contract support area."],
+  [Plane, "Drone services", "Aerial property media and photo-ready positioning under the consulting umbrella."],
+  [FileSearch, "Home inspections", "Future residential inspection service placeholder for owner review."],
   [Hammer, "Remodeling coordination", "Vendor and project coordination support for rental readiness."],
   [ClipboardList, "Administrative support", "Real estate paperwork, scheduling, and operational follow-through."],
 ] as const;
@@ -22,7 +25,7 @@ export default function ServicesPage() {
           <SectionHeading
             eyebrow="Services"
             title="Real estate operations support from listing to lease."
-            text="This page describes the intended service offering for owner review. Final service-area boundaries, license language, brokerage affiliations, and any required disclosures should be added before launch."
+            text="This page describes the intended service offering for owner review. Final service-area boundaries, license language, operating details, and any required disclosures should be added before launch."
           />
         </div>
       </section>

@@ -7,7 +7,7 @@ import { Header } from "@/components/Header";
 export const metadata: Metadata = {
   title: "Remvick Group | Real Estate, Rentals & Property Management",
   description:
-    "A family-owned real estate, rental, brokerage, and residential property management business.",
+    "A family-owned real estate, rental, listing, sales support, and residential property management business.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

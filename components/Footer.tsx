@@ -9,7 +9,7 @@ export function Footer() {
           <p className="font-serif text-3xl font-semibold">Remvick Group</p>
           <p className="mt-3 max-w-lg text-white/68">
             Public website MVP for Remvick Investment Corporation. Contact information,
-            service areas, license details, and brokerage disclosures are placeholders.
+            service areas, license details if applicable, and company disclosures are placeholders.
           </p>
           <div className="mt-5">
             <BusinessLines compact />

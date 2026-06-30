@@ -7,27 +7,27 @@ export type BusinessLine = {
 
 export const businessLines: BusinessLine[] = [
   {
-    name: "Remvick Group",
-    description: "Main public site for the family real estate business.",
-    href: "https://remvick-web-zihnjtarma-uc.a.run.app",
+    name: "Rentals",
+    description: "Rental housing information, tenant resources, and future resident workflows.",
+    href: "/portal",
     status: "Live",
   },
   {
-    name: "Remvick Consulting",
-    description: "Brokerage, property management, leasing, remodeling, and real estate operations support.",
-    href: "/consulting",
-    status: "Live",
-  },
-  {
-    name: "Rental Listings",
-    description: "Browse available, upcoming, and occupied rental properties.",
+    name: "Listings",
+    description: "Public rental listings for available and upcoming homes. Occupied homes stay private.",
     href: "/rentals",
     status: "Live",
   },
   {
-    name: "Tenant Portal",
-    description: "Login for tenants, contractors, administrators, and new rental applicants.",
-    href: "/portal",
+    name: "Sales",
+    description: "Future sales-related support and owner-approved property opportunities.",
+    href: "/contact",
+    status: "Under construction",
+  },
+  {
+    name: "Property Management for Others",
+    description: "Consulting and management support for people outside Remvick-owned properties.",
+    href: "/consulting",
     status: "Live",
   },
 ];

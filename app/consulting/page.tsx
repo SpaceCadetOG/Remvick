@@ -2,39 +2,45 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
-  Building2,
   ClipboardCheck,
+  FileSearch,
   FileText,
   Hammer,
   KeyRound,
   LineChart,
   Megaphone,
-  UsersRound,
+  Plane,
+  Search,
 } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ServiceCard } from "@/components/ServiceCard";
 
 export const metadata: Metadata = {
-  title: "Remvick Consulting | Brokerage & Real Estate Operations",
+  title: "Remvick Consulting | Real Estate Operations Support",
   description:
-    "Brokerage, property management, leasing, remodeling coordination, and administrative real estate support from Remvick Consulting.",
+    "Property management, leasing, rental search, drone services, home inspections, government contracting, and administrative real estate support from Remvick Consulting.",
 };
 
 const consultingServices = [
   {
-    icon: Building2,
-    title: "Real estate brokerage",
-    text: "Buyer, seller, investor, and transaction coordination support. Final brokerage affiliation and license disclosures are pending.",
+    icon: Megaphone,
+    title: "Government contracting",
+    text: "Capability statement support, vendor profile organization, document readiness, and administrative coordination.",
+  },
+  {
+    icon: Plane,
+    title: "Drone services",
+    text: "Aerial property media, photo-ready positioning, listing visuals, and property documentation support.",
+  },
+  {
+    icon: FileSearch,
+    title: "Home inspections",
+    text: "Future residential inspection support placeholder, including reports, photos, and owner review workflows.",
   },
   {
     icon: KeyRound,
     title: "Property management",
-    text: "Residential rental oversight, tenant communication, vendor coordination, and organized owner reporting.",
-  },
-  {
-    icon: UsersRound,
-    title: "Tenant placement",
-    text: "Rental inquiry handling, showing coordination, applicant workflow support, and move-in preparation.",
+    text: "Residential rental oversight, tenant communication, vendor coordination, and organized owner reporting for others.",
   },
   {
     icon: FileText,
@@ -42,9 +48,9 @@ const consultingServices = [
     text: "Lease preparation coordination, renewal tracking, notices, records, and resident communication support.",
   },
   {
-    icon: Megaphone,
-    title: "Property marketing",
-    text: "Listing presentation, rental descriptions, market positioning, showing readiness, and lead follow-up.",
+    icon: Search,
+    title: "Rental search support",
+    text: "Help for people looking to rent homes, compare options, prepare questions, and understand application steps.",
   },
   {
     icon: Hammer,
@@ -73,8 +79,9 @@ export default function ConsultingPage() {
             Remvick Consulting
           </h1>
           <p className="mt-6 max-w-3xl text-xl leading-8 text-white/78">
-            Brokerage, property management, leasing, remodeling coordination, and administrative
-            support for owners, investors, residents, and real estate operations.
+            Consulting covers work Remvick does for other people or outside Remvick-owned
+            properties, including management support, leasing support, rental search help, drone
+            services, inspections, government contracting, and administrative operations.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
@@ -99,14 +106,14 @@ export default function ConsultingPage() {
           <SectionHeading
             eyebrow="Practical real estate support"
             title="Professional coordination with an owner-led, personal approach."
-            text="Remvick Consulting is designed to help organize the work around real estate: transactions, rental operations, tenant communication, property readiness, vendor coordination, and administrative follow-through."
+            text="Remvick Consulting is designed to help organize the work around real estate: rental operations, tenant communication, property readiness, vendor coordination, inspections, media, and administrative follow-through."
           />
           <div className="border-l-4 border-clay bg-white p-6 shadow-sm">
-            <p className="text-sm font-bold uppercase tracking-[0.16em] text-clay">Disclosure placeholder</p>
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-clay">Scope placeholder</p>
             <p className="mt-3 leading-7 text-ink/65">
-              TODO: Insert final brokerage entity, managing broker relationship, Illinois license
-              information, service areas, required disclosures, and scope limitations before
-              promoting regulated brokerage services.
+              TODO: Insert final company details, service areas, license information if applicable,
+              insurance/vendor requirements, required disclosures, and scope limitations before
+              promoting regulated services.
             </p>
           </div>
         </div>
@@ -117,7 +124,7 @@ export default function ConsultingPage() {
           <SectionHeading
             eyebrow="Consulting services"
             title="Support across the real estate lifecycle."
-            text="Services can be refined as the business confirms final brokerage, management, and consulting scope."
+            text="Services can be refined as the business confirms final management, consulting, inspection, drone, and vendor-support scope."
           />
           <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {consultingServices.map((service) => (

@@ -29,15 +29,37 @@ import {
   type TenantStatus,
 } from "@/data/tenant-admin";
 
-type View = "Overview" | "Tenants" | "Applications" | "Leases" | "Payments" | "Maintenance" | "Documents" | "Notices";
+type View =
+  | "Overview"
+  | "Properties"
+  | "House Search"
+  | "Listings"
+  | "Tenants"
+  | "Applications"
+  | "Showings"
+  | "Background Links"
+  | "Leases"
+  | "Payments"
+  | "Maintenance"
+  | "Contractors"
+  | "Records"
+  | "Documents"
+  | "Notices";
 
 const views: { name: View; icon: typeof LayoutDashboard }[] = [
   { name: "Overview", icon: LayoutDashboard },
+  { name: "Properties", icon: Building2 },
+  { name: "House Search", icon: Search },
+  { name: "Listings", icon: ClipboardList },
   { name: "Tenants", icon: Users },
   { name: "Applications", icon: ClipboardList },
+  { name: "Showings", icon: CalendarDays },
+  { name: "Background Links", icon: FileText },
   { name: "Leases", icon: FileText },
   { name: "Payments", icon: CircleDollarSign },
   { name: "Maintenance", icon: Wrench },
+  { name: "Contractors", icon: Settings },
+  { name: "Records", icon: FileText },
   { name: "Documents", icon: FileText },
   { name: "Notices", icon: MessageSquareText },
 ];
@@ -71,11 +93,12 @@ function PlaceholderPanel({ view }: { view: View }) {
       <h2 className="mt-2 font-serif text-3xl font-semibold">{view}</h2>
       <p className="mt-3 max-w-2xl text-ink/65">
         This area is prepared for the future {view.toLowerCase()} workflow. Authentication,
-        permissions, database records, uploads, messaging, and notifications will be connected later.
+        role permissions, database records, uploads, scheduling, background-check links, messaging,
+        and notifications will be connected later.
       </p>
       <button className="mt-6 inline-flex items-center gap-2 rounded bg-ink px-4 py-3 text-sm font-bold text-white opacity-60" disabled>
         <Plus className="h-4 w-4" />
-        Add {view === "Applications" ? "Application" : view.slice(0, -1)}
+        Add {view === "Applications" ? "Application" : view}
       </button>
     </section>
   );
@@ -171,7 +194,7 @@ export function AdminPortal({ session }: { session: DemoSession }) {
               <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
                 {[
                   [Users, "Active tenants", "4", "Across four placeholder homes"],
-                  [Building2, "Occupied homes", "3", "One upcoming listing"],
+                  [Building2, "Managed properties", "4", "Occupied homes stay private publicly"],
                   [CircleDollarSign, "Open balance", `$${totalBalance.toLocaleString()}`, "Placeholder ledger"],
                   [Wrench, "Open requests", "3", "One high priority"],
                 ].map(([Icon, label, value, note]) => (

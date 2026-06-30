@@ -1,13 +1,13 @@
-import { Award, BriefcaseBusiness, HeartHandshake, MapPinned } from "lucide-react";
+import { BriefcaseBusiness, HeartHandshake, Home, MapPinned } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
 
 type AboutItem = [LucideIcon, string, string];
 
 const aboutItems: AboutItem[] = [
-  [Award, "Minority-owned", "Business certification details placeholder."],
-  [Award, "Woman-owned", "Ownership language placeholder for review."],
-  [BriefcaseBusiness, "Small Business", "Government and vendor profile copy placeholder."],
+  [Home, "Rentals", "Rental housing and tenant workflow placeholder."],
+  [BriefcaseBusiness, "Listings and sales support", "Listing operations and future sales support placeholder."],
+  [BriefcaseBusiness, "Property management for others", "Consulting and management support placeholder."],
   [MapPinned, "Local service areas", "Office location and service-area list placeholder."],
 ];
 
@@ -19,7 +19,7 @@ export default function AboutPage() {
           <SectionHeading
             eyebrow="About Remvick"
             title="A family-owned real estate business with room to grow carefully."
-            text="Remvick Group is the public-facing brand for Remvick Investment Corporation, led by Owner/Broker Remy F. Balogun. This MVP presents the business clearly while leaving space for final service areas, brokerage details, license information, and owner biography."
+            text="Remvick Group is the public-facing brand for Remvick Investment Corporation, led by Remy F. Balogun. This MVP presents the business clearly while leaving space for final service areas, company details, license information if applicable, and owner biography."
           />
         </div>
       </section>
@@ -29,10 +29,10 @@ export default function AboutPage() {
           <div className="rounded bg-forest p-8 text-white">
             <HeartHandshake className="h-10 w-10 text-gold" />
             <h2 className="mt-5 font-serif text-4xl font-semibold">Remy F. Balogun</h2>
-            <p className="mt-2 font-bold text-gold">Owner / Broker</p>
+            <p className="mt-2 font-bold text-gold">Owner / Principal</p>
             <p className="mt-5 leading-8 text-white/76">
-              TODO: Insert final owner bio, professional credentials, headshot, brokerage
-              affiliation language, and license disclosures after owner review.
+              TODO: Insert final owner bio, professional credentials, headshot, company language,
+              and license disclosures if applicable after owner review.
             </p>
           </div>
           <div className="grid gap-5 sm:grid-cols-2">
@@ -53,10 +53,10 @@ export default function AboutPage() {
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-clay">MVP note</p>
             <h2 className="mt-3 font-serif text-4xl font-semibold">Built for review first, expansion second.</h2>
             <p className="mt-5 text-lg leading-8 text-ink/70">
-              The site intentionally avoids tenant portal, admin portal, payments, applications,
-              maintenance tickets, document storage, and notification features in this first
-              release. The code structure leaves those workflows ready for future backend routes,
-              APIs, and database tables.
+              The site now includes placeholder portal workflows for owner review while keeping
+              payments, real applications, document storage, notifications, and production
+              authentication disconnected. The code structure leaves those workflows ready for
+              future backend routes, APIs, and database tables.
             </p>
           </div>
         </div>

@@ -66,7 +66,8 @@ export function TenantPortal({ session }: { session: DemoSession }) {
     const form = event.currentTarget;
     const data = new FormData(form);
     const title = String(data.get("issue") || "Maintenance request");
-    setRequests((current) => [{ title, detail: "Submitted just now", status: "Open" }, ...current]);
+    const category = String(data.get("category") || "General");
+    setRequests((current) => [{ title, detail: `${category} / photos attached / submitted just now`, status: "Open" }, ...current]);
     setMaintenanceSuccess(true);
     form.reset();
   }
@@ -202,8 +203,12 @@ export function TenantPortal({ session }: { session: DemoSession }) {
                 <h2 className="mt-2 font-serif text-3xl font-semibold">Request service</h2>
                 <form onSubmit={submitMaintenance} className="mt-6 grid gap-5">
                   <label className="grid gap-2"><span className="label">Issue</span><input className="field" name="issue" required placeholder="Describe the problem briefly" /></label>
+                  <label className="grid gap-2"><span className="label">Maintenance category</span><select className="field" name="category" required><option>Plumbing</option><option>Electrical</option><option>Heating / cooling</option><option>Appliance</option><option>Exterior</option><option>Other</option></select></label>
+                  <label className="grid gap-2"><span className="label">Nature of problem</span><select className="field" name="nature" required><option>Repair needed</option><option>Leak or water concern</option><option>Safety concern</option><option>Inspection requested</option><option>Follow-up needed</option></select></label>
                   <label className="grid gap-2"><span className="label">Priority</span><select className="field" name="priority"><option>Routine</option><option>Urgent</option><option>Emergency placeholder</option></select></label>
                   <label className="grid gap-2"><span className="label">Details</span><textarea className="field min-h-28" name="details" required placeholder="Where is the issue and when did it begin?" /></label>
+                  <label className="grid gap-2"><span className="label">Required photos</span><input className="field" name="photos" type="file" accept="image/*" multiple required /></label>
+                  <label className="grid gap-2"><span className="label">Notes or updates</span><textarea className="field min-h-24" name="notes" placeholder="Add access notes, preferred times, or other updates." /></label>
                   <button className="inline-flex min-h-12 items-center justify-center gap-2 rounded bg-clay px-5 font-bold text-white"><Send className="h-4 w-4" />Submit demo request</button>
                 </form>
                 {maintenanceSuccess ? <p className="mt-4 bg-forest/10 p-4 text-sm font-semibold text-forest">Request added to this browser session.</p> : null}

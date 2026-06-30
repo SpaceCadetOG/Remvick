@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Building2, CheckCircle2, HeartHandshake, Home, KeyRound, ShieldCheck } from "lucide-react";
+import { ArrowRight, HeartHandshake, Home, KeyRound, Search, ShieldCheck } from "lucide-react";
 import { BusinessLines } from "@/components/BusinessLines";
 import { ButtonLink } from "@/components/ButtonLink";
 import { PropertyCard } from "@/components/PropertyCard";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ServiceCard } from "@/components/ServiceCard";
-import { properties } from "@/data/properties";
+import { publicProperties } from "@/data/properties";
 
-const featured = properties.slice(0, 3);
+const featured = publicProperties.slice(0, 3);
 
 export default function HomePage() {
   return (
@@ -33,7 +33,7 @@ export default function HomePage() {
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/86">
               Remvick Group helps families, tenants, and property owners navigate rentals,
-              leasing, brokerage, and property management with professionalism, care, and
+              leasing, listings, sales support, and property management with professionalism, care, and
               local experience.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -52,21 +52,16 @@ export default function HomePage() {
             <SectionHeading
               eyebrow="Family-owned. Locally focused."
               title="A real estate partner built around care, clarity, and follow-through."
-              text="Remvick Group is the public brand of Remvick Investment Corporation, supporting rental housing, brokerage coordination, residential property management, leasing, remodeling support, and the administrative work that keeps real estate moving."
+              text="Remvick Group is the public brand of Remvick Investment Corporation, supporting rental housing, listing operations, sales support, residential property management, leasing, remodeling support, and the administrative work that keeps real estate moving."
             />
           </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {[
-              "Minority-owned",
-              "Woman-owned",
-              "Small Business",
-              "Owner-led service",
-            ].map((item) => (
-              <div key={item} className="rounded border border-ink/10 bg-white p-5 shadow-sm">
-                <CheckCircle2 className="mb-4 h-6 w-6 text-clay" />
-                <p className="font-semibold">{item}</p>
-              </div>
-            ))}
+          <div className="rounded border border-ink/10 bg-white p-6 shadow-sm">
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-clay">Local operations</p>
+            <p className="mt-3 text-lg leading-8 text-ink/70">
+              The site is organized around practical next steps: find a rental, review listings,
+              contact the team, or use the portal preview for tenant, applicant, contractor, and
+              admin workflows.
+            </p>
           </div>
         </div>
       </section>
@@ -113,7 +108,7 @@ export default function HomePage() {
           />
           <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             <ServiceCard icon={Home} title="Residential Rentals" text="Listing, showing, and tenant communication support for residential homes." />
-            <ServiceCard icon={Building2} title="Brokerage" text="Placeholder brokerage details and license information will be inserted after owner review." />
+            <ServiceCard icon={Search} title="Listings" text="Public rental listing presentation with occupied properties kept off the public site." />
             <ServiceCard icon={KeyRound} title="Leasing Support" text="Tenant placement, lease coordination, and move-in readiness support." />
             <ServiceCard icon={ShieldCheck} title="Property Management" text="Owner-minded management operations for residential rental properties." />
           </div>
@@ -146,10 +141,10 @@ export default function HomePage() {
           <div className="rounded bg-white/10 p-8 ring-1 ring-white/15">
             <HeartHandshake className="h-10 w-10 text-gold" />
             <h2 className="mt-5 font-serif text-4xl font-semibold">Remy F. Balogun</h2>
-            <p className="mt-2 font-bold text-gold">Owner / Broker</p>
+            <p className="mt-2 font-bold text-gold">Owner / Principal</p>
             <p className="mt-5 text-white/78">
-              TODO: Insert final owner bio, professional headshot, brokerage details, license
-              information, and service-area language after review.
+              TODO: Insert final owner bio, professional headshot, company details, license
+              information if applicable, and service-area language after review.
             </p>
           </div>
           <div>
@@ -170,7 +165,7 @@ export default function HomePage() {
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-5 sm:px-8 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-clay">Start a conversation</p>
-            <h2 className="mt-3 font-serif text-4xl font-semibold">Have a rental, brokerage, or management question?</h2>
+            <h2 className="mt-3 font-serif text-4xl font-semibold">Have a rental, listing, or management question?</h2>
           </div>
           <ButtonLink href="/contact">Send a Message</ButtonLink>
         </div>

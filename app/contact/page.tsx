@@ -18,8 +18,8 @@ export default function ContactPage() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <SectionHeading
             eyebrow="Contact"
-            title="Send a rental, management, brokerage, or general question."
-            text="Messages can be used for rental inquiries, property management conversations, brokerage questions, leasing support, and general real estate operations requests."
+            title="Send a rental, management, consulting, or general question."
+            text="Messages can be used for rental inquiries, property management conversations, leasing support, rental search help, consulting services, and general real estate operations requests."
           />
         </div>
       </section>
@@ -36,8 +36,8 @@ export default function ContactPage() {
             <div className="rounded bg-forest p-6 text-white">
               <p className="font-bold text-gold">Placeholder disclosures</p>
               <p className="mt-3 leading-7 text-white/75">
-                TODO: Add final brokerage details, license information, fair housing language,
-                privacy policy, and terms before public launch.
+                TODO: Add final company details, license information if applicable, fair housing
+                language, privacy policy, and terms before public launch.
               </p>
             </div>
           </aside>

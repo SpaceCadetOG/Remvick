@@ -7,8 +7,11 @@ import { Send } from "lucide-react";
 const interests = [
   "Rental inquiry",
   "Property management",
-  "Brokerage question",
   "Leasing support",
+  "Rental search support",
+  "Government contracting",
+  "Drone services",
+  "Home inspections",
   "Remodeling coordination",
   "General question",
 ];
